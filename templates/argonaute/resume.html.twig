@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+
+{% block page %}
+    <div class="container my-5 z-depth-1">
+
+
+        <!--Section: Content-->
+        <section class="dark-grey-text">
+
+            <div class="row pr-lg-5">
+                <div class="col-md-7 mb-4">
+
+                    <div class="view">
+                        <img
+                                {% if vich_uploader_asset(argonaute, 'imageFile') %}
+                                    src="{{ vich_uploader_asset(argonaute, 'imageFile') | imagine_filter('resume_argo') }}"
+                                {% else %}
+                                    src="https://playmobileros.com/815-tm_large_default/serie-de-guerrier-grec-figurines-playmobil-9146-11-nouveaux-2017.jpg"
+                                {% endif %}
+                                class="img-fluid" alt="smaple image">
+                    </div>
+
+                </div>
+                <div class="col-md-5 d-flex align-items-center">
+                    <div>
+
+                        <h3 class="font-weight-bold mb-4">{{ argonaute }}</h3>
+
+                        <p>C'est un honneur de servir la gloire du seigneur Jason !</p>
+
+                        <div class="row pt-2 pb-2">
+                            <div class="col-6">
+                                <a href="{{ path("argo_update", {argonaute: argonaute.id}) }}"
+                                   class="btn btn-blue btn-lg btn-block">Modifier</a>
+                            </div>
+                            <div class="col-6">
+                                <a href="{{ path("argo_delete", {argonaute: argonaute.id}) }}"
+                                   class="btn btn-danger btn-lg btn-block">Supprimer </a>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+    </div>
+
+
+    <!--Section: Content-->
+
+
+    </div>
+
+{% endblock %}

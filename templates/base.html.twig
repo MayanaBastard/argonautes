@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Let's kill Pélias!{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/argo.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/mdb.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('fontawesome/css/all.min.css') }}">
+    {% endblock %}
+</head>
+<body>
+<div class="container">
+
+    {% block body %}
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+
+        <!--Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark primary-color">
+            <ul class="navbar-nav mr-auto">
+
+                <!-- Navbar brand -->
+                <a class="navbar-brand" href="{{ path('home') }}">Les argonautes</a>
+                <li class="nav-item active">
+                    {% set menu = knp_menu_get('main_menu', [], {  }) %}
+                    {% for item in menu %}
+                    <!-- Links -->
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ item.uri }}">
+                        <i class="{{ item.getExtra('icon') }}"></i>
+                        Accueil
+                    </a>
+                </li>
+                {% endfor %}
+
+            </ul>
+
+
+        </nav>
+        <!--/.Navbar-->
+
+
+        <!-- Notifications -->
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% block page %}
+        {% endblock %}
+
+    {% endblock %}
+    {% block javascripts %}{% endblock %}
+</div>
+</body>
+</html>

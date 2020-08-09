@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block page %}
+
+
+
+    <h1>Carnet de bord de Jason</h1>
+    <!-- Main section -->
+    <main>
+
+        <!-- New member form -->
+        {% block form %}
+            <h2>Ajouter un(e) Argonaute</h2>
+            <div class="argoform">
+                {{ form(form) }}
+            </div>
+        {% endblock %}
+
+        <!-- Member list -->
+
+        <div class="container pt-5 my-5 z-depth-1">
+            <section class="p-md-3 mx-md-5 text-lg-left">
+                <h2 class="text-center font-weight-bold mb-4 pb-1">Membres de l'équipage</h2>
+                {% if argonautes %}
+                    <p class="text-center lead mb-5 pb-2 text-muted">Go Argos Go !</p>
+                {% else %}
+                    <p class="text-center lead mb-5 pb-2 text-muted">Ohoh... il est temps de recruter !</p>
+                {% endif %}
+                <div class="row">
+                    {% for argo in argonautes %}
+                        <div class="col-lg-4 col-sm-6 mb-5">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-5 avatar w-100 white d-flex justify-content-center align-items-center">
+
+                                    <img
+                                            {% if vich_uploader_asset(argo, 'imageFile') %}
+                                                src="{{ vich_uploader_asset(argo, 'imageFile') | imagine_filter('mini_argo') }}"
+                                            {% else %}
+                                                src="https://playmobileros.com/815-tm_large_default/serie-de-guerrier-grec-figurines-playmobil-9146-11-nouveaux-2017.jpg"
+                                            {% endif %}
+                                            alt="thumbnail" class="img-thumbnail z-depth-1"
+
+
+                                    />
+                                </div>
+                                <div class="col-7">
+                                    <h6 class="font-weight-bold pt-2">{{ argo }}</h6>
+                                    <p class="argo-go">
+                                        <a href="{{ path("argo_resume", {argonaute: argo.id}) }}" class="argo-go">Voir</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Réalisé par Jason en Anthestérion de l'an 515 avant JC</p>
+    </footer>
+
+{% endblock %}
